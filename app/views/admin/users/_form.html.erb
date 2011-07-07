@@ -1,0 +1,4 @@
+<h1><%= form_title(@user) %></h1>
+<%= render "#{controller.action_name}" %>
+<%= link_to 'Show', admin_user_path(@user) unless @user.id.nil? %> |
+<%= link_to 'Back', admin_users_path %>

@@ -1,0 +1,4 @@
+<%= form_for(@user, :url => admin_users_path(@user)) do |f| %>
+    <%= raw render_error @user %>
+    <%= render 'content', {:f => f} %>
+<% end %>
