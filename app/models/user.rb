@@ -1,26 +1,28 @@
 class User < ActiveRecord::Base
-  has_one       :language
-  belongs_to    :item
+  has_one :language
+  belongs_to :item
 
-  has_many      :error_logs,
-                :class_name   => 'ErrorLog',
-                :foreign_key  => 'fixed_by'
-  has_many      :item_connections,
-                :as           => :connectable,
-                :dependent    => :destroy
+  has_many :error_logs,
+           :class_name => 'ErrorLog',
+           :foreign_key => 'fixed_by'
+
+  has_many :item_connections,
+           :as => :connectable,
+           :dependent => :destroy
 
   attr_accessor :password, :password_confirmation
 
-  validates     :login,
-                :presence     => true,
-                :uniqueness   => true
-  validates     :password,
-                :presence     => true,
-                :length       => 6..30,
-                :on           => :create,
-                :confirmation => true
+  validates :login,
+            :presence => true,
+            :uniqueness => true
 
-  before_create   :downcase_username, :encrypt_password
+  validates :password,
+            :presence => true,
+            :length => 6..30,
+            :on => :create,
+            :confirmation => true
+
+  before_create :downcase_username, :encrypt_password
 
   def downcase_username
     self.login.downcase!

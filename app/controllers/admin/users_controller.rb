@@ -41,15 +41,15 @@ class Admin::UsersController < AdminController
   # POST /users.json
   def create
     @user = create_it(User, params)
-    unless @user.id.nil?
-      respond_to do |format|
-        format.html { redirect_to admin_user_path(@user), notice: 'User was successfully created.' }
-        format.json { render json: admin_user_path(@user), status: :created, location: @user }
-      end
-    else
+    if @user.id.nil?
       respond_to do |format|
         format.html { render action: "new" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to admin_user_path(@user), notice: 'User was successfully created.' }
+        format.json { render json: admin_user_path(@user), status: :created, location: @user }
       end
     end
   end

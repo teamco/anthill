@@ -1,20 +1,18 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0.rc4'
+gem 'rails'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
 gem 'mysql2'
-gem 'awesome_nested_set', :git => 'git://github.com/collectiveidea/awesome_nested_set.git'
+gem 'awesome_nested_set'
 gem "query_trace"
-gem 'awesome_print'
-gem 'wirble'
 gem "vidibus-routing_error"
 
 # Asset template engines
-gem 'sass-rails', "~> 3.1.0.rc"
+gem 'sass-rails'
 gem 'coffee-script'
 gem 'uglifier'
 
@@ -28,6 +26,10 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+group :development do
+  gem 'awesome_print'
+  gem 'wirble'
+end
 
 group :test do
   # Pretty printed test output

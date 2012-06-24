@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -28,8 +29,8 @@ ActiveRecord::Schema.define(:version => 20110621174134) do
     t.text     "error_trace",  :limit => 16777215
     t.boolean  "is_fixed",                         :default => false
     t.integer  "fixed_by"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                          :null => false
+    t.datetime "updated_at",                                          :null => false
   end
 
   create_table "item_connections", :force => true do |t|
@@ -42,8 +43,8 @@ ActiveRecord::Schema.define(:version => 20110621174134) do
     t.boolean  "up_delete",        :default => true, :null => false
     t.integer  "connectable_id"
     t.string   "connectable_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
   end
 
   add_index "item_connections", ["item_id"], :name => "index_item_connections_on_item_id"
@@ -81,8 +82,8 @@ ActiveRecord::Schema.define(:version => 20110621174134) do
     t.boolean  "active",     :default => true
     t.boolean  "published",  :default => true
     t.boolean  "public",     :default => true
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   add_index "preferences", ["item_id"], :name => "index_preferences_on_item_id"
@@ -135,8 +136,8 @@ ActiveRecord::Schema.define(:version => 20110621174134) do
     t.string   "charset"
     t.float    "completed_in"
     t.boolean  "is_error",                            :default => true
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at",                                            :null => false
   end
 
   create_table "users", :force => true do |t|
