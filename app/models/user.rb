@@ -1,47 +1,48 @@
 class User < ActiveRecord::Base
-  has_one :language
-  belongs_to :item
 
-  has_many :error_logs,
-           :class_name => 'ErrorLog',
-           :foreign_key => 'fixed_by'
+    include BCrypt
 
-  has_many :item_connections,
-           :as => :connectable,
-           :dependent => :destroy
+    has_one :language
+    belongs_to :item
 
-  attr_accessor :password, :password_confirmation
+    has_many :error_logs,
+             :class_name => 'ErrorLog',
+             :foreign_key => 'fixed_by'
 
-  validates :login,
-            :presence => true,
-            :uniqueness => true
+    has_many :item_connections,
+             :as => :connectable,
+             :dependent => :destroy
 
-  validates :password,
-            :presence => true,
-            :length => 6..30,
-            :on => :create,
-            :confirmation => true
+    attr_accessor :password, :password_confirmation
 
-  before_create :downcase_username, :encrypt_password
+    validates :login,
+              :presence => true,
+              :uniqueness => true
 
-  def downcase_username
-    self.login.downcase!
-  end
+    validates :password,
+              :presence => true,
+              :length => 6..30,
+              :on => :create,
+              :confirmation => true
 
-  def self.authenticate(login, password)
-    user = find_by_login(login)
-    if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
-      user
-    else
-      nil
+    before_create :downcase_username, :encrypt_password
+
+    def downcase_username
+        self.login.downcase!
     end
-  end
 
-  def encrypt_password
-    if password.present?
-      self.password_salt = BCrypt::Engine.generate_salt
-      self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
+# @param [String] login
+# @param [String] password
+    def self.authenticate(login, password)
+        user = find_by_login(login)
+        user && user.password_hash == Engine.hash_secret(password, user.password_salt) ? user : nil
     end
-  end
+
+    def encrypt_password
+        if password.present?
+            self.password_salt = Engine.generate_salt
+            self.password_hash = Engine.hash_secret(password, password_salt)
+        end
+    end
 
 end

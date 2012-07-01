@@ -5,3 +5,8 @@ en:
   hello: "Hello world"
   back: "Back"
   show: "Show"
+  user:
+    created: "User was successfully created."
+    updated: "User was successfully updated."
+  new: "new"
+  edit: "edit"
