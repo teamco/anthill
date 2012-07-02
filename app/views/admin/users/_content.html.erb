@@ -1,15 +1,27 @@
-<div class="field">
-    <%= f.label :login %><br />
+<ul class="form-content">
+  <li>
+    <%= f.label :login %>
+    <br/>
     <%= f.text_field :login %>
-</div>
-<div class="field">
-    <%= f.label :password %><br />
+  </li>
+  <li>
+    <%= f.label :password %>
+    <br/>
     <%= f.password_field :password %>
-</div>
-<div class="field">
-    <%= f.label :password_confirmation %><br />
+  </li>
+  <li>
+    <%= f.label :password_confirmation %>
+    <br/>
     <%= f.password_field :password_confirmation %>
-</div>
+  </li>
+  <% f.fields_for :user_profile do |pf| %>
+      <li>
+        <%= pf.label :email, "Email" %>
+        <%= pf.text_field :email %>
+      </li>
+
+  <% end %>
+</ul>
 <div class="actions">
-    <%= f.submit %>
+  <%= f.submit %>
 </div>

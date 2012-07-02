@@ -20,7 +20,7 @@ module Transactions
         @data
     end
 
-    def update
+    def update_it
 
     end
 end

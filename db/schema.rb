@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110621174134) do
+ActiveRecord::Schema.define(:version => 20120702120017) do
 
   create_table "domains", :force => true do |t|
     t.integer "item_id"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20110621174134) do
     t.integer "parent_id"
     t.integer "lft"
     t.integer "rgt"
+    t.integer "depth"
     t.integer "language_id"
     t.integer "tool_id"
     t.integer "lock_id"
@@ -77,16 +78,25 @@ ActiveRecord::Schema.define(:version => 20110621174134) do
   add_index "languages", ["item_id"], :name => "index_languages_on_item_id"
 
   create_table "preferences", :force => true do |t|
-    t.integer  "item_id",                      :null => false
+    t.integer  "item_id",                       :null => false
     t.boolean  "visible",    :default => true
     t.boolean  "active",     :default => true
     t.boolean  "published",  :default => true
     t.boolean  "public",     :default => true
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.boolean  "commented",  :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   add_index "preferences", ["item_id"], :name => "index_preferences_on_item_id"
+
+  create_table "profiles", :force => true do |t|
+    t.integer "user_id"
+    t.string  "email"
+    t.string  "first_name"
+    t.string  "last_name"
+    t.string  "nick_name"
+  end
 
   create_table "shares", :force => true do |t|
     t.string  "title"
@@ -148,5 +158,7 @@ ActiveRecord::Schema.define(:version => 20110621174134) do
     t.string  "password_salt", :null => false
     t.integer "timeout"
   end
+
+  add_index "users", ["item_id"], :name => "index_users_on_item_id"
 
 end

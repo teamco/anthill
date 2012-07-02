@@ -9,6 +9,6 @@ class CreateUsers < ActiveRecord::Migration
             t.integer :timeout, :default => nil
         end
 
-#    add_index :users, :item_id
+        add_index :users, :item_id
     end
 end

@@ -3,29 +3,37 @@ class User < ActiveRecord::Base
     include BCrypt
 
     has_one :language
+
     belongs_to :item
 
     has_many :error_logs,
-             :class_name => 'ErrorLog',
-             :foreign_key => 'fixed_by'
+             class_name: 'ErrorLog',
+             foreign_key: 'fixed_by'
 
     has_many :item_connections,
-             :as => :connectable,
-             :dependent => :destroy
+             as: :connectable,
+             dependent: :destroy
+
+    has_one :profile,
+             dependent: :destroy
 
     attr_accessor :password, :password_confirmation
 
     validates :login,
-              :presence => true,
-              :uniqueness => true
+              presence: true,
+              uniqueness: true
 
     validates :password,
-              :presence => true,
-              :length => 6..30,
-              :on => :create,
-              :confirmation => true
+              presence: true,
+              length: 6..30,
+              on: :create,
+              confirmation: true
 
     before_create :downcase_username, :encrypt_password
+
+    # accepts_nested_attributes_for enables the property's profile object
+    # to be updated at the same time as the property object
+    accepts_nested_attributes_for :profile, :allow_destroy => true
 
     def downcase_username
         self.login.downcase!

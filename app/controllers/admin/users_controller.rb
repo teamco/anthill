@@ -25,15 +25,13 @@ class Admin::UsersController < AdminController
     # GET /users/new.json
     def new
         @user = User.new
-        @action_url = admin_users_path
-        render :form
+        render :form, locals: { url: admin_users_path }
     end
 
     # GET /users/1/edit
     def edit
         @user = User.find(params[:id])
-        @action_url = admin_user_path(@user)
-        render :form
+        render :form, locals: { url: admin_user_path(@user) }
     end
 
     # GET /users/1/edit
@@ -43,10 +41,13 @@ class Admin::UsersController < AdminController
         @user = create_it(User, params)
         if @user.id.nil?
             respond_to do |format|
-                format.html { render action: :index }
+                format.html { render :form, :locals => { url: admin_users_path } }
                 format.json { render json: @user.errors, status: :unprocessable_entity }
             end
         else
+
+            @user.build_profile(params[:profile])
+
             respond_to do |format|
                 format.html { redirect_to admin_user_path(@user), notice: t('user.created') }
                 format.json { render json: admin_user_path(@user), status: :created, location: @user }
