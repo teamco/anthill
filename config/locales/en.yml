@@ -8,5 +8,13 @@ en:
   user:
     created: "User was successfully created."
     updated: "User was successfully updated."
-  new: "new"
-  edit: "edit"
+  new:
+    user: "New User"
+  edit: "Edit"
+  error: "error"
+  prohibited:
+    save: "prohibited from being saved:"
+  are:
+    you:
+      sure: "Are you sure?"
+  destroy: "Destroy"

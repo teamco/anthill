@@ -1,0 +1,7 @@
+<h1><%= form_title(@user) %></h1>
+<%= form_for(@user, url: @action_url, action: controller.action_name) do |f| %>
+    <%= raw render_error @user %>
+    <%= render 'content', {:f => f} %>
+<% end %>
+<%= link_to t('show'), admin_user_path(@user) unless @user.id.nil? %> |
+<%= link_to t('back'), admin_users_path %>
