@@ -19,18 +19,18 @@ ActiveRecord::Schema.define(:version => 20120702120017) do
     t.string  "ip"
   end
 
-  add_index "domains", ["item_id"], :name => "index_domains_on_item_id"
+  add_index "domains", %w(item_id), :name => "index_domains_on_item_id"
 
   create_table "error_logs", :force => true do |t|
     t.integer  "user_log_id"
     t.string   "error_type"
     t.integer  "error_status"
     t.string   "error_title"
-    t.text     "error_trace",  :limit => 16777215
-    t.boolean  "is_fixed",                         :default => false
+    t.text     "error_trace",  :limit => 1048576
+    t.boolean  "is_fixed",                        :default => false
     t.integer  "fixed_by"
-    t.datetime "created_at",                                          :null => false
-    t.datetime "updated_at",                                          :null => false
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
   end
 
   create_table "item_connections", :force => true do |t|
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(:version => 20120702120017) do
     t.datetime "updated_at",                         :null => false
   end
 
-  add_index "item_connections", ["item_id"], :name => "index_item_connections_on_item_id"
+  add_index "item_connections", %w(item_id), :name => "index_item_connections_on_item_id"
 
   create_table "items", :force => true do |t|
     t.integer "reference_id"
@@ -63,8 +63,8 @@ ActiveRecord::Schema.define(:version => 20120702120017) do
     t.integer "updated_by"
   end
 
-  add_index "items", ["parent_id"], :name => "index_items_on_parent_id"
-  add_index "items", ["reference_id"], :name => "index_items_on_reference_id"
+  add_index "items", %w(parent_id), :name => "index_items_on_parent_id"
+  add_index "items", %w(reference_id), :name => "index_items_on_reference_id"
 
   create_table "languages", :force => true do |t|
     t.integer "item_id"
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(:version => 20120702120017) do
     t.string  "char_set",     :limit => 100, :default => "utf-8"
   end
 
-  add_index "languages", ["item_id"], :name => "index_languages_on_item_id"
+  add_index "languages", %w(item_id), :name => "index_languages_on_item_id"
 
   create_table "preferences", :force => true do |t|
     t.integer  "item_id",                       :null => false
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(:version => 20120702120017) do
     t.datetime "updated_at",                    :null => false
   end
 
-  add_index "preferences", ["item_id"], :name => "index_preferences_on_item_id"
+  add_index "preferences", %w(item_id), :name => "index_preferences_on_item_id"
 
   create_table "profiles", :force => true do |t|
     t.integer "user_id"
@@ -131,7 +131,7 @@ ActiveRecord::Schema.define(:version => 20120702120017) do
     t.string   "protocol"
     t.string   "host"
     t.string   "port"
-    t.text     "user_params",     :limit => 16777215
+    t.text     "user_params",     :limit => 1048576
     t.text     "user_session"
     t.text     "user_cookies"
     t.string   "query_string"
@@ -145,9 +145,9 @@ ActiveRecord::Schema.define(:version => 20120702120017) do
     t.string   "content_type"
     t.string   "charset"
     t.float    "completed_in"
-    t.boolean  "is_error",                            :default => true
-    t.datetime "created_at",                                            :null => false
-    t.datetime "updated_at",                                            :null => false
+    t.boolean  "is_error",                           :default => true
+    t.datetime "created_at",                                           :null => false
+    t.datetime "updated_at",                                           :null => false
   end
 
   create_table "users", :force => true do |t|
