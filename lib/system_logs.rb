@@ -5,7 +5,7 @@ module SystemLogs
 #  Before filter:
 #  Create user log per each action
     def create_log
-        logger.info "-- Create user log: #{Time.now}"
+        logger.info "-- Start: User log: #{Time.now}"
 
         qs = request.query_string.dup.force_encoding("UTF-8")
 
@@ -42,6 +42,7 @@ module SystemLogs
 
         @log = UserLog.create!(hash) #if SystemLogs.except({:controller => controller_name, :action => action_name})
 
+        logger.info "-- End: User log: #{Time.now}"
     end
 
     def update_log

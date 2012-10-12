@@ -17,8 +17,8 @@ module Spider
     ]
 
     protected
-    def search_bots
 
+    def search_bots
         user_agent = request.env['HTTP_USER_AGENT']
         ROBOTS.detect { |bot| bot if user_agent.match(bot) }
     end
